@@ -5,7 +5,7 @@ import {sequelize} from './sequelize'
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: string
   declare email: string
-  declare fistname: string
+  declare firstname: string
   declare lastname: string
   declare age: number
 }
@@ -25,7 +25,7 @@ User.init({
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  fistname: {
+  firstname: {
     type: DataTypes.STRING,
     allowNull: false
   },
