@@ -1,15 +1,26 @@
 /* eslint-disable no-undef */
 import supertest, {CallbackHandler} from 'supertest'
-import app from '../../src/main'
+import {Server} from '../../src/server'
+
+let application: Server
+
+beforeAll(async () => {
+  application = new Server()
+  await application.listen()
+})
+
+afterAll(async () => {
+  await application.stop()
+})
 
 describe('Users module get controller', () => {
   test('Should responds 200 http status code', (done: CallbackHandler) => {
-    supertest(app).get('/users').expect(200).end(done)
+    supertest(application.getServer).get('/users').expect(200).end(done)
   })
 
   test('should responds an array of existing records', (done: CallbackHandler) => {
-    supertest(app).get('/users').expect(function (res) {
+    supertest(application.getServer).get('/users').expect(function (res) {
       expect(Array.isArray(res.body.users)).toBeTruthy()
-    }, done).end(done)
+    }).end(done)
   })
 })
