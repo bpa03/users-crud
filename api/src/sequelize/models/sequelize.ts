@@ -23,14 +23,3 @@ export const sequelize = new Sequelize(envConfig.database, envConfig.username, e
   port: envConfig.port,
   host: envConfig.host
 })
-
-export const connect = async () => {
-  try {
-    await sequelize.authenticate()
-    console.log('Database connected')
-  } catch (e) {
-    console.log({env, envConfig})
-    // console.log(e)
-    process.exit(1)
-  }
-}

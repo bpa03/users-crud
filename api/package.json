@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run migrations-dev && npx dotenv -e ./.env.development -- npx ts-node-dev ./src/main.ts",
-    "test": "jest --coverage --watchAll",
+    "test": "npm run docker-test-up && npm run migrate-test && jest --coverage --watchAll && npm run docker-test-down",
     "build": "npx tsc --build",
-    "dev-docker": "docker compose -f ./docker/docker-compose-dev.yml up",
-    "migrations-dev": "npx sequelize-cli db:migrate"
+    "migrations-dev": "npx sequelize db:migrate --env development",
+    "migrate-test": "npx sequelize db:migrate --env test",
+    "docker-test-up": "docker compose -f ./docker/docker-compose-test.yml up -d && ./scripts/ensure-mysql.sh",
+    "docker-test-down": "docker compose -f ./docker/docker-compose-test.yml down"
   },
   "keywords": [
     "api",
