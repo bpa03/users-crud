@@ -1,11 +1,8 @@
 /* eslint-disable no-undef */
 import supertest, {CallbackHandler} from 'supertest'
-import {Server} from '../../src/server'
-
-let application: Server
+import {application} from '../server'
 
 beforeAll(async () => {
-  application = new Server()
   await application.listen()
 })
 
@@ -18,7 +15,7 @@ describe('Users module post controller', () => {
     supertest(application.getServer).post('/users').expect(400).end(done)
   })
 
-  test('Should responds 201 http status code when an user is created', (done: CallbackHandler) => {
+  test('Should responds 201 http status code and the created record', (done: CallbackHandler) => {
     const user = {
       email: 'bpa@test.com',
       firstname: 'Baldassare',
@@ -30,22 +27,7 @@ describe('Users module post controller', () => {
       .post('/users')
       .set('Content-Type', 'application/json')
       .send(user)
-      .expect('Content-Type', /json/)
-      .expect(201, done)
-  })
-
-  test('Should responds the created record', (done: CallbackHandler) => {
-    const user = {
-      email: 'bpa@test.com',
-      firstname: 'Baldassare',
-      lastname: 'Pugliese',
-      age: 20
-    }
-
-    supertest(application.getServer)
-      .post('/users')
-      .set('Content-Type', 'application/json')
-      .send(user)
+      .expect(201)
       .expect('Content-Type', /json/)
       .expect(function (res) {
         expect(res.body).toHaveProperty('id')

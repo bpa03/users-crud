@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
-import {Model, InferAttributes, InferCreationAttributes, DataTypes} from 'sequelize'
+import {Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOptional} from 'sequelize'
 import {sequelize} from './sequelize'
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-  declare id: string
+  declare id: CreationOptional<string>
   declare email: string
   declare firstname: string
   declare lastname: string

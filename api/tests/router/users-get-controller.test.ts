@@ -1,11 +1,8 @@
 /* eslint-disable no-undef */
 import supertest, {CallbackHandler} from 'supertest'
-import {Server} from '../../src/server'
-
-let application: Server
+import {application} from '../server'
 
 beforeAll(async () => {
-  application = new Server()
   await application.listen()
 })
 
