@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import supertest, {CallbackHandler} from 'supertest'
 import {application} from '../server'
+import {UsersMother} from '../dummy/users-mother'
 
 beforeAll(async () => {
   await application.listen()
@@ -16,12 +17,7 @@ describe('Users module post controller', () => {
   })
 
   test('Should responds 201 http status code and the created record', (done: CallbackHandler) => {
-    const user = {
-      email: 'bpa@test.com',
-      firstname: 'Baldassare',
-      lastname: 'Pugliese',
-      age: 20
-    }
+    const user = UsersMother.createUser()
 
     supertest(application.getServer)
       .post('/users')
