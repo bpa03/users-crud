@@ -8,4 +8,8 @@ export default class UserRepository implements UserRepositoryI {
   public async findAll (): Promise<User[]> {
     return this.model.findAll()
   }
+
+  public async create (user: { email: string; age: number; firstname: string; lastname: string }): Promise<User> {
+    return (await UserModel.create({...user})).toJSON()
+  }
 }

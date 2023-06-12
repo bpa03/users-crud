@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run migrations-dev && npx dotenv -e ./.env.development -- npx ts-node-dev ./src/start.ts",
-    "test": "npm run docker-test-up && npm run migrate-test && jest --coverage --watchAll maxWorkers=1 && npm run docker-test-down",
+    "test": "npm run docker-test-up && npm run migrate-test && jest --coverage --watchAll --maxWorkers=1 && npm run docker-test-down",
     "build": "npx tsc --build",
     "migrations-dev": "npx sequelize db:migrate --env development",
     "migrate-test": "npx sequelize db:migrate --env test",

@@ -10,12 +10,11 @@ export class UsersPostController implements Controller {
       return
     }
 
-    res.status(httpStatusCodes.CREATED).json({
-      id: 'custom id from database',
-      email: req.body.email,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      age: req.body.age
-    })
+    try {
+      const newUser = await userRepository.create(req.body)
+      res.status(httpStatusCodes.CREATED).json(newUser)
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
