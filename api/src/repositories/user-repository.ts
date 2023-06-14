@@ -10,6 +10,11 @@ export default class UserRepository implements UserRepositoryI {
   }
 
   public async create (user: { email: string; age: number; firstname: string; lastname: string }): Promise<User> {
-    return (await UserModel.create({...user})).toJSON()
+    const newUser = await UserModel.create({...user})
+    return newUser.toJSON()
+  }
+
+  public async findByEmail (email: string) {
+    return UserModel.findOne({where: {email}})
   }
 }

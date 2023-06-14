@@ -33,4 +33,19 @@ describe('Users module post controller', () => {
         expect(res.body.age).toEqual(user.age)
       }).end(done)
   })
+
+  test('Should responds 400 http status code if create an user with an existing email', (done: CallbackHandler) => {
+    const user = UsersMother.createUser()
+    user.email = 'test@gmail.com'
+
+    supertest(application.getServer)
+      .post('/users')
+      .set('Content-Type', 'application/json')
+      .send(user)
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .expect(function (res) {
+        expect(res.body).toHaveProperty('detail')
+      }).end(done)
+  })
 })

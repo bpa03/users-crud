@@ -10,6 +10,13 @@ export class UsersPostController implements Controller {
       return
     }
 
+    const userExists = await userRepository.findByEmail(req.body.email)
+
+    if (userExists) {
+      res.status(400).json({detail: 'User exists on database'})
+      return
+    }
+
     try {
       const newUser = await userRepository.create(req.body)
       res.status(httpStatusCodes.CREATED).json(newUser)
