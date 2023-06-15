@@ -17,7 +17,7 @@ describe('Users module post controller', () => {
   })
 
   test('Should responds 201 http status code and the created record', (done: CallbackHandler) => {
-    const user = UsersMother.createUser()
+    const user = UsersMother.generateCreateUserDto()
 
     supertest(application.getServer)
       .post('/users')
@@ -35,7 +35,7 @@ describe('Users module post controller', () => {
   })
 
   test('Should responds 400 http status code if create an user with an existing email', (done: CallbackHandler) => {
-    const user = UsersMother.createUser()
+    const user = UsersMother.generateCreateUserDto()
     user.email = 'test@gmail.com'
 
     supertest(application.getServer)

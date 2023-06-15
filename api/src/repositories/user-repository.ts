@@ -15,7 +15,13 @@ export default class UserRepository implements UserRepositoryI {
     return newUser.toJSON()
   }
 
-  public async findByEmail (email: string) {
-    return UserModel.findOne({where: {email}})
+  public async findByEmail (email: string): Promise<User | null> {
+    const user = await UserModel.findOne({where: {email}})
+    return user === null ? null : user.toJSON()
+  }
+
+  public async findById (uuid: string): Promise<User | null> {
+    const user = await UserModel.findOne({where: {id: uuid}})
+    return user === null ? null : user.toJSON()
   }
 }
