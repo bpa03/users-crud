@@ -1,5 +1,6 @@
 import {User} from '../interfaces/user/user'
 import {UserRepositoryI} from '../interfaces/user/user-repository'
+import {CreateUserDto} from '../dtos/user/create-user-dto'
 import UserModel from '../sequelize/models/user'
 
 export default class UserRepository implements UserRepositoryI {
@@ -9,8 +10,8 @@ export default class UserRepository implements UserRepositoryI {
     return this.model.findAll()
   }
 
-  public async create (user: { email: string; age: number; firstname: string; lastname: string }): Promise<User> {
-    const newUser = await UserModel.create({...user})
+  public async create (user: CreateUserDto): Promise<User> {
+    const newUser = await UserModel.create(user)
     return newUser.toJSON()
   }
 

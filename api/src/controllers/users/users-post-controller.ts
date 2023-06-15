@@ -19,11 +19,7 @@ export class UsersPostController implements Controller {
       return
     }
 
-    try {
-      const newUser = await userRepository.create(req.body)
-      res.status(httpStatusCodes.CREATED).json(newUser)
-    } catch (e) {
-      console.log(e)
-    }
+    const newUser = await userRepository.create(req.body)
+    res.status(httpStatusCodes.CREATED).json(newUser)
   }
 }

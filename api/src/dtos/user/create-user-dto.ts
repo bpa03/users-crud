@@ -13,5 +13,5 @@ export class CreateUserDto {
 
   @IsNumber({allowNaN: false}, {message: 'Field must be a number'})
   @IsNotEmpty({message: 'Field is required'})
-    age!: string
+    age!: number
 }
