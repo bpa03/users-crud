@@ -11,17 +11,21 @@ export default class UserRepository implements UserRepositoryI {
   }
 
   public async create (user: CreateUserDto): Promise<User> {
-    const newUser = await UserModel.create(user)
+    const newUser = await this.model.create(user)
     return newUser.toJSON()
   }
 
   public async findByEmail (email: string): Promise<User | null> {
-    const user = await UserModel.findOne({where: {email}})
+    const user = await this.model.findOne({where: {email}})
     return user === null ? null : user.toJSON()
   }
 
   public async findById (uuid: string): Promise<User | null> {
-    const user = await UserModel.findOne({where: {id: uuid}})
+    const user = await this.model.findOne({where: {id: uuid}})
     return user === null ? null : user.toJSON()
+  }
+
+  public async deleteById (uuid: string): Promise<number> {
+    return await this.model.destroy({where: {id: uuid}})
   }
 }
