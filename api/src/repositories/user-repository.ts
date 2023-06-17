@@ -2,6 +2,7 @@ import {User} from '../interfaces/user/user'
 import {UserRepositoryI} from '../interfaces/user/user-repository'
 import {CreateUserDto} from '../dtos/user/create-user-dto'
 import UserModel from '../sequelize/models/user'
+import {UpdateUserDto} from '../dtos/user/update-user-dto'
 
 export default class UserRepository implements UserRepositoryI {
   constructor (private readonly model: typeof UserModel) {}
@@ -27,5 +28,12 @@ export default class UserRepository implements UserRepositoryI {
 
   public async deleteById (uuid: string): Promise<number> {
     return await this.model.destroy({where: {id: uuid}})
+  }
+
+  public async updateUser (uuid: string, user: UpdateUserDto): Promise<User> {
+    const storedUser = await this.model.findOne({where: {id: uuid}}) as UserModel
+    storedUser.set(user)
+    await storedUser.save()
+    return storedUser.toJSON()
   }
 }

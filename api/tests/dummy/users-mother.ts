@@ -10,6 +10,14 @@ export class UsersMother {
     }
   }
 
+  static generateUpdateUserDto () {
+    return {
+      firstname: faker.person.firstName(),
+      lastname: faker.person.lastName(),
+      age: faker.number.int({min: 18, max: 70})
+    }
+  }
+
   static generateRandomId () {
     return faker.string.uuid()
   }
