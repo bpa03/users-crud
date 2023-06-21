@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npm run migrations-dev && npx dotenv -e ./.env.development -- npx ts-node-dev ./src/start.ts",
     "test": "npm run populate-db-test && jest --maxWorkers=1 && npm run docker-test-down",
+    "test-dev": "npm run pretest && npm run populate-db-test && jest --watchAll --maxWorkers=1 && npm run docker-test-down",
     "pretest": "npm run docker-test-up && npm run migrate-test",
     "populate-db-test": "npx sequelize db:seed:all --env test",
     "migrations-dev": "npx sequelize db:migrate --env development",
