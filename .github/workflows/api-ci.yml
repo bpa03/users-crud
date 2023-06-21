@@ -13,30 +13,30 @@ jobs:
       run:
         shell: bash
         working-directory: ./api
-      steps:
-        - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-        - name: Node.js setup ${{ matrix.node-version }}
-          uses: actions/setup-node@v3
-          with:
-            node-version: ${{ matrix.node-version }}
+      - name: Node.js setup ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-        - name: Cache node modules
-          id: cache-npm
-          uses: actions/cache@v3
-          env:
-            cache-name: cache-node-modules
-          with:
-            path: ~/.npm
-            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json' }}
-          
-        - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-          name: List the state of node modules
-          continue-on-error: true
-          run: npm list
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json' }}
         
-        - name: Install dependencies
-          run: npm ci
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
+      
+      - name: Install dependencies
+        run: npm ci
 
-        - name: Run tests
-          run: npm test
+      - name: Run tests
+        run: npm test
