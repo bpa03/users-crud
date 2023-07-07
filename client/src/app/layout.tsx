@@ -19,9 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        <body className={`${inter.variable} font-sans`}>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </body>
+      <body className={`${inter.variable} font-sans`}>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
+      </body>
     </html>
   )
 }
