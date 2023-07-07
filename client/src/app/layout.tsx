@@ -1,6 +1,9 @@
 import './globals.css'
 import {Inter} from 'next/font/google'
 
+// Providers
+import ReactQueryProvider from '@/lib/react-query'
+
 const inter = Inter({subsets: ['latin'], variable: '--font-inter'})
 
 export const metadata = {
@@ -16,7 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans`}>{children}</body>
+        <body className={`${inter.variable} font-sans`}>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </body>
     </html>
   )
 }
