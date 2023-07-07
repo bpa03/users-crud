@@ -4,10 +4,11 @@
   "description": "Basic users crud",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run migrations-dev && npx dotenv -e ./.env.development -- npx ts-node-dev ./src/start.ts",
+    "dev": "npm run migrations-dev && npm run populate-db-dev && npx dotenv -e ./.env.development -- npx ts-node-dev ./src/start.ts",
     "test": "npm run populate-db-test && jest --maxWorkers=1 && npm run docker-test-down",
     "test-dev": "npm run pretest && npm run populate-db-test && jest --watchAll --maxWorkers=1 && npm run docker-test-down",
     "pretest": "npm run docker-test-up && npm run migrate-test",
+    "populate-db-dev": "npx sequelize db:seed:all --env development",
     "populate-db-test": "npx sequelize db:seed:all --env test",
     "migrations-dev": "npx sequelize db:migrate --env development",
     "migrate-test": "npx sequelize db:migrate --env test",
@@ -26,6 +27,7 @@
     "body-parser": "^1.20.2",
     "class-transformer-validator": "^0.9.1",
     "class-validator": "^0.14.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.1.4",
     "dotenv-cli": "^7.2.1",
     "express": "^4.18.2",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.2",
     "@types/morgan": "^1.9.4",

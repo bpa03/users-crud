@@ -1,6 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import * as http from 'http'
 
 // Routers
@@ -17,6 +18,7 @@ export class Server {
     // Middlewares
     this.express.use(bodyParser.json())
     this.express.use(bodyParser.urlencoded({extended: true}))
+    this.express.use(cors())
     if (process.env.NODE_ENV === 'development') this.express.use(morgan('dev'))
 
     // Routes
