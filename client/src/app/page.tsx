@@ -3,6 +3,7 @@ import getQueryClient from '@/lib/get-query-client'
 import {dehydrate} from '@tanstack/react-query'
 import Hydrate from '@/lib/hydrate-client'
 import {getUsers} from '@/features/users/api/get-users'
+import UserForm from '@/features/users/components/user-form'
 
 export default async function Home() {
   const queryClient = getQueryClient()
@@ -14,6 +15,7 @@ export default async function Home() {
       <main>
         <h1>Users crud</h1>
         <UsersList />
+        <UserForm />
       </main>
     </Hydrate>
   )
