@@ -6,6 +6,10 @@ export interface User {
   lastname: string;
 }
 
+export interface GetUsersDto {
+  users: ListOfUsers;
+}
+
 export interface CreateUserDto {
   email: string;
   age: number;

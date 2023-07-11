@@ -13,6 +13,7 @@ export async function getUsers(): Promise<ListOfUsers> {
     throw new Error('Error on fetch users')
   }
 
-  const users = await response.json()
+  const data = await response.json()
+  const users = data.users
   return users
 }

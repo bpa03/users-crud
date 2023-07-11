@@ -3,7 +3,7 @@ import {createUser} from '../api/create-user'
 import {CreateUserDto, User} from '../types'
 
 type UseCreateUserOptions = {
-  config?: UseMutationOptions<User, unknown, CreateUserDto, unknown>
+  config?: UseMutationOptions<User, unknown, CreateUserDto>
 }
 
 export default function useCreateUser({config}: UseCreateUserOptions = {}) {
