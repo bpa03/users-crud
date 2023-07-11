@@ -1,9 +1,9 @@
-import UsersList from '@/features/users/components/users-list'
-import getQueryClient from '@/lib/get-query-client'
 import {dehydrate} from '@tanstack/react-query'
 import Hydrate from '@/lib/hydrate-client'
 import {getUsers} from '@/features/users/api/get-users'
-import UserForm from '@/features/users/components/user-form'
+import CreateUserForm from '@/features/users/containers/create-user-form'
+import GetUsersList from '@/features/users/containers/get-users-list'
+import getQueryClient from '@/lib/get-query-client'
 
 export default async function Home() {
   const queryClient = getQueryClient()
@@ -12,10 +12,16 @@ export default async function Home() {
 
   return (
     <Hydrate state={dehydratedState}>
-      <main>
-        <h1>Users crud</h1>
-        <UsersList />
-        <UserForm />
+      <main className="w-11/12 mx-auto">
+        <h1 className="text-center my-8 font-extrabold text-3xl underline">Users crud</h1>
+        <div className="flex flex-row gap-8 mt-12">
+          <div className="flex-[.4]">
+            <CreateUserForm />
+          </div>
+          <div className="flex-[.6]">
+            <GetUsersList />
+          </div>
+        </div>
       </main>
     </Hydrate>
   )

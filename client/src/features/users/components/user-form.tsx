@@ -35,9 +35,9 @@ const UserForm: FC<UserFormProps> = ({onSubmit, loading}) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit((form) => {
         if (onSubmit) onSubmit(form)
-      })} role="form" className="space-y-4 w-10/12 mx-auto mt">
+      })} role="form" className="space-y-3">
         <div className="text-center">
-          <h1 className="font-bold text-2xl capitalize">User form</h1>
+          <h2 className="font-bold text-2xl capitalize">User form</h2>
         </div>
         <FormField 
           control={form.control}
