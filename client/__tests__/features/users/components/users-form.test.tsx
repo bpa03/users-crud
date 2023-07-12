@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import UserForm from '../../../src/features/users/components/user-form'
+import UserForm from '../../../../src/features/users/components/user-form'
 
 describe('Create user form', () => {
   test('Should render user form in the document', () => {
