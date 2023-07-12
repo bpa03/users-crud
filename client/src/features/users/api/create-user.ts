@@ -1,3 +1,4 @@
+import fetch from 'node-fetch'
 import {CreateUserDto, User} from '../types'
 
 export async function createUser(body: CreateUserDto): Promise<User> {
