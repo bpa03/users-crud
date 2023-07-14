@@ -9,4 +9,14 @@ export class UserMother {
       age: faker.number.int({min: 20, max: 40})
     }
   }
+
+  static generateUser() {
+    return {
+      id: faker.string.uuid(),
+      email: faker.internet.email(),
+      firstname: faker.person.firstName(),
+      lastname: faker.person.lastName(),
+      age: faker.number.int({min: 20, max: 40})
+    }
+  }
 }

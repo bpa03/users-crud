@@ -3,6 +3,7 @@ import {FC} from 'react'
 import {useQueryClient} from '@tanstack/react-query'
 import useCreateUser from '../hooks/use-create-user'
 import UserForm from '../components/user-form'
+import {Button} from '../../../components/ui/button'
 import {ListOfUsers} from '../types'
 
 const CreateUserForm: FC<object> = () => {
@@ -46,7 +47,11 @@ const CreateUserForm: FC<object> = () => {
         mutate(user)
       }}
       loading={isLoading}
-    />
+      formDescription="Create and add a new user in your database"
+      formTitle="Create user"
+    >
+      <Button variant="outline">Create</Button>
+    </UserForm>
   )
 }
 
