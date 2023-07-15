@@ -148,4 +148,17 @@ describe('Create user form', () => {
     expect(screen.getByLabelText('Email')).toHaveValue(user.email)
     expect(screen.getByLabelText('Age')).toHaveValue(user.age.toString())
   })
+
+  test('Email input should be disabled if the user is editing a record', async () => {
+    const user = UserMother.generateUser()
+    render(
+      <UserForm {...defaultProps} loading={true} initialValues={user} mode="edit">
+        <Button variant="outline">Create user</Button>
+      </UserForm>
+    )
+    const openDialogButton = screen.getByText(/create user/i)
+    await userEvent.click(openDialogButton)
+
+    expect(screen.getByLabelText('Email')).toHaveAttribute('aria-disabled', 'true')
+  })
 })
