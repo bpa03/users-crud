@@ -17,4 +17,11 @@ export interface CreateUserDto {
   lastname: string;
 }
 
+export interface UpdateUserDto {
+  email: string;
+  age: number;
+  firstname: string;
+  lastname: string;
+}
+
 export type ListOfUsers = Array<User>;

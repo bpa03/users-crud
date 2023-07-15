@@ -19,13 +19,14 @@ const userFormSchema = yup.object({
 
 interface UserFormProps {
   onSubmit?: (form: yup.InferType<typeof userFormSchema>) => void;
+  mode?: 'edit' | 'create';
   formTitle: string;
   formDescription: string;
   loading?: boolean;
   initialValues?: User;
 }
 
-const UserForm: FC<PropsWithChildren<UserFormProps>> = ({onSubmit, loading, formDescription, formTitle, children, initialValues}) => {
+const UserForm: FC<PropsWithChildren<UserFormProps>> = ({onSubmit, loading, formDescription, formTitle, children, initialValues, mode}) => {
   const form = useForm({
     resolver: yupResolver(userFormSchema),
     defaultValues: {
@@ -58,7 +59,7 @@ const UserForm: FC<PropsWithChildren<UserFormProps>> = ({onSubmit, loading, form
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} disabled={mode && mode === 'edit'} aria-disabled={mode && mode === 'edit'} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

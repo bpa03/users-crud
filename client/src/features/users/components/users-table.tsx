@@ -1,4 +1,5 @@
 import {FC} from 'react'
+import {MdOutlineClose} from 'react-icons/md'
 import {ListOfUsers} from '../types'
 import {
   Table,
@@ -9,8 +10,7 @@ import {
   TableRow
 } from '../../../components/ui/table'
 import {Button} from '../../../components/ui/button'
-import {BsPencilFill} from 'react-icons/bs'
-import {MdOutlineClose} from 'react-icons/md'
+import EditUserForm from '../containers/edit-user-form'
 
 interface UsersTableProps {
   users?: ListOfUsers;
@@ -37,9 +37,7 @@ const UsersTable: FC<UsersTableProps> = ({users}) => (
           <TableCell className="text-left">{user.age}</TableCell>
           <TableCell className="text-right">
             <div className="flex justify-end space-x-3">
-              <Button variant="outline" size="icon">
-                <BsPencilFill size={14}/>
-              </Button>
+              <EditUserForm user={user} />
               <Button variant="destructive" size="icon">
                 <MdOutlineClose size={18}/>
               </Button>
