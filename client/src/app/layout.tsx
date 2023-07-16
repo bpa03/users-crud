@@ -2,8 +2,9 @@ import './globals.css'
 import {Inter} from 'next/font/google'
 
 // Providers
-import ThemeProvider from '@/components/theme-provider'
-import ReactQueryProvider from '@/lib/react-query'
+import {Toaster} from '../components/ui/toaster'
+import ThemeProvider from '../components/theme-provider'
+import ReactQueryProvider from '../lib/react-query'
 
 const inter = Inter({subsets: ['latin'], variable: '--font-inter'})
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans`}>
         <ThemeProvider attribute="class" enableSystem defaultTheme="dark">
           <ReactQueryProvider>{children}</ReactQueryProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

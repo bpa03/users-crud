@@ -3,6 +3,7 @@ import {useQueryClient} from '@tanstack/react-query'
 import {MdOutlineClose} from 'react-icons/md'
 import {Button} from '../../../components/ui/button'
 import useDeleteUser from '../hooks/use-delete-user'
+import {useToast} from '../../../components/ui/use-toast'
 import {ListOfUsers} from '../types'
 
 interface DeleteUserButtonProps {
@@ -10,6 +11,7 @@ interface DeleteUserButtonProps {
 }
 
 const DeleteUserButton: FC<DeleteUserButtonProps> = ({id}) => {
+  const {toast} = useToast()
   const queryClient = useQueryClient()
   const {mutate} = useDeleteUser({
     config: {
@@ -33,12 +35,18 @@ const DeleteUserButton: FC<DeleteUserButtonProps> = ({id}) => {
       },
       onSettled: () => {
         queryClient.invalidateQueries(['users'])
+      },
+      onSuccess: () => {
+        toast({
+          title: 'The user was removed successfully!',
+          variant: 'default'
+        })
       }
     }
   })
 
   return (
-    <Button variant="destructive" size="icon" onClick={() => mutate(id)}>
+    <Button variant="destructive" size="icon" onClick={() => mutate(id)} aria-label="delete user">
       <MdOutlineClose size={18} />
     </Button>
   )

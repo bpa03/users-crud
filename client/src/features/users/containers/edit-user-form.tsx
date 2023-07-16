@@ -4,6 +4,7 @@ import {BsPencilFill} from 'react-icons/bs'
 import {Button} from '../../../components/ui/button'
 import UserForm from '../components/user-form'
 import {ListOfUsers, User} from '../types'
+import {useToast} from '../../../components/ui/use-toast'
 import useUpdateUser from '../hooks/use-update-user'
 
 interface EditUserFormProps {
@@ -11,6 +12,7 @@ interface EditUserFormProps {
 }
 
 const EditUserForm: FC<EditUserFormProps> = ({user}) => {
+  const {toast} = useToast()
   const queryClient = useQueryClient()
   const {mutate, isLoading} = useUpdateUser({
     config: {
@@ -35,6 +37,12 @@ const EditUserForm: FC<EditUserFormProps> = ({user}) => {
       },
       onSettled: () => {
         queryClient.invalidateQueries(['users'])
+      },
+      onSuccess: () => {
+        toast({
+          title: 'The user was updated successfully!',
+          variant: 'default'
+        })
       }
     }
   })
@@ -50,7 +58,7 @@ const EditUserForm: FC<EditUserFormProps> = ({user}) => {
       mutate({body: form, id: user.id})
     }}
    >
-    <Button variant="outline" size="icon">
+    <Button variant="outline" size="icon" aria-label="update user">
       <BsPencilFill size={14}/>
     </Button>
    </UserForm>

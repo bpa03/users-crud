@@ -4,9 +4,11 @@ import {useQueryClient} from '@tanstack/react-query'
 import useCreateUser from '../hooks/use-create-user'
 import UserForm from '../components/user-form'
 import {Button} from '../../../components/ui/button'
+import {useToast} from '../../../components/ui/use-toast'
 import {ListOfUsers} from '../types'
 
 const CreateUserForm: FC<object> = () => {
+  const {toast} = useToast()
   const queryClient = useQueryClient()
   const {mutate, isLoading} = useCreateUser({
     config: {
@@ -37,6 +39,12 @@ const CreateUserForm: FC<object> = () => {
       },
       onSettled: () => {
         queryClient.invalidateQueries({queryKey: ['users']})
+      },
+      onSuccess: () => {
+        toast({
+          title: 'The new user was created successfully!',
+          variant: 'default'
+        })
       }
     }
   })
