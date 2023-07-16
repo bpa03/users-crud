@@ -9,7 +9,7 @@ const defaultProps = {
   formDescription: 'Add a new user'
 }
 
-describe('Create user form', () => {
+describe('User form', () => {
   test('Should render dialog user form in the document an', async () => {
     render(
       <UserForm {...defaultProps}>

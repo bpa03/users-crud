@@ -19,4 +19,12 @@ export class UserMother {
       age: faker.number.int({min: 20, max: 40})
     }
   }
+
+  static generateMultipleUsers(quantity: number) {
+    const users = []
+    for (let i = 0; i < quantity; i++) {
+      users.push(this.generateUser())
+    }
+    return users
+  }
 }
