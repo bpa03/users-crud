@@ -1,4 +1,4 @@
-name: API CI
+name: Client CI
 on:
   push:
     branches: [ "master" ]
@@ -12,7 +12,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./api
+        working-directory: ./client
     steps:
       - uses: actions/checkout@v3
 
@@ -25,7 +25,7 @@ jobs:
         id: cache-npm
         uses: actions/cache@v3
         env:
-          cache-name: cache-node-modules-api
+          cache-name: cache-node-modules-client
         with:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
@@ -39,4 +39,4 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm test:ci
