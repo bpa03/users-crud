@@ -47,5 +47,22 @@ export const userHandlers = [
       firstname: body.firstname,
       lastname: body.lastname
     }))    
+  }),
+  rest.delete('http://userscrud.api/users/:id', async (_req, _res, ctx) => {
+    const userId = _req.params.id as string
+    const currentUser = users.find(({id}) => id === userId)
+
+    if (currentUser) {
+      return _res(ctx.status(204))
+    } else {
+      return _res(
+        ctx.status(404),
+        ctx.set('Content-Type', 'application/json'),
+        ctx.json({
+          message: `User with id ${userId} doesn't not exists`
+        })
+      )
+    }
+
   })
 ]
